@@ -15,16 +15,22 @@ class Course(models.Model):
     
     slug_course = models.SlugField(verbose_name='Atalho')
     
-    description_course = models.TextField(verbose_name='Descrição do curso', blank=True)
+    description_course = models.TextField(verbose_name='Descrição do curso')
     
-    image_course = models.ImageField(upload_to='course_img/%Y/%m/%d', verbose_name='Imagem', null=True, blank=True)
+    image_course = models.ImageField(upload_to='course_img/%Y/%m/%d', verbose_name='Imagem')
 
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Criado em')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Data de criação')
     
-    update_at = models.DateTimeField(auto_now=True, verbose_name='Atualizado em')
+    update_at = models.DateTimeField(auto_now=True, verbose_name='Data de atualização')
 
     objects = CourseManager()
     
 
     def __str__(self):
         return self.name_course
+
+
+    class Meta:
+        verbose_name = 'curso'
+        verbose_name_plural = 'cursos'
+    
