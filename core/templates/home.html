@@ -1,8 +1,39 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block 'title' %} Simple Mooc {% endblock %}
 
 
 {% block 'content' %}
     {% include 'partials/_header.html' %}
+
+    <div class="bg-light">
+        <div class="container pt-4 pb-4">
+            <h1 class="fs-1">Uma simples plataforma de ensino a distância</h1>
+            
+            <h2 class="text-muted fs-4">O Simple MOOC visa simplificar o ensino a distância, provendo ferramentas objetivas e de fácil uso para cursos a distância.</h2>
+        
+            <button class="btn btn-primary mt-2">Saiba mais</button>
+        </div>
+    </div>
+    
+    <div class="container card mt-5 border-0" style="max-width: 1140px;">
+        <div class="row g-0">
+            <div class="col-md-8">
+                <div class="card-body">
+                    <p class="border-bottom text-uppercase text-muted pb-1">Video aulas e materiais digitais</p>
+
+                    <h5 class="card-title">Publique suas aulas</h5>
+                    <p class="card-text">O Simple MOOC tem um sistema simples e prático para que o professor disbonibilize vídeo-aulas e materiais digitais como: Pdf's, slides, imagens ...</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <img src="{% static 'img/avengers_endgame.jpg' %}" class="img-fluid rounded-start" alt="...">
+            </div>
+        </div>
+    </div>
+
+    <br>
+    {% include 'partials/_footer.html' %}
 {% endblock %}
