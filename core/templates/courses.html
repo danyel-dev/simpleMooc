@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'title' %} Simple Mooc {% endblock %}
+
+
+{% block 'content' %}
+    {% include 'partials/_header.html' %}
+
+    <div class="bg-light">
+        <div class="container pt-4 pb-4">
+            <h2 class="d-inline-block text-uppercase text-muted fs-5 mb-4 pb-1 border-bottom">Listagem de cursos do simplemooc</h2>
+        
+            <p class="fs-5">Abaixo a lista de cursos disponíveis na plataforma</p>
+        </div>
+    </div>
+    
+
+    {% for course in courses %}
+        <div class="container card mt-5 border-0" style="max-width: 1140px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{{ course.image_course.url }}" class="img-fluid rounded-start" alt="course.image_course.url">
+                </div>
+
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <a href="#" class="d-block text-uppercase mb-3 stretched-link">{{ course.name_course }}</a>
+
+                        {{ course.description_course|linebreaks }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+    <br>
+    <br>
+    <br>
+    <br>
+    
+    {% include 'partials/_footer.html' %}
+{% endblock %}
