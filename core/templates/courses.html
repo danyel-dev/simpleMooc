@@ -15,33 +15,29 @@
         </div>
     </div>
     
+    <div class="courses" style="margin-bottom: 100px;">
+        {% for course in courses %}
+            <div class="container card mt-5 border-0" style="max-width: 1140px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        {% if course.image_course %}
+                            <img src="{{ course.image_course.url }}" class="img-fluid rounded-start" alt="{{ course.name_course }}">
+                        {% else %}
+                            <img src="{% static 'img/unnamed.png' %}" class="img-fluid rounded-start" alt="{{ course.name_course }}">
+                        {% endif %}
+                    </div>
 
-    {% for course in courses %}
-        <div class="container card mt-5 border-0" style="max-width: 1140px;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    {% if course.image_course %}
-                        <img src="{{ course.image_course.url }}" class="img-fluid rounded-start" alt="{{ course.name_course }}">
-                    {% else %}
-                        <img src="{% static 'img/unnamed.png' %}" class="img-fluid rounded-start" alt="{{ course.name_course }}">
-                    {% endif %}
-                </div>
+                    <div class="col-md-8">
+                        <div class="card-body py-0">
+                            <a href="#" class="d-block text-uppercase mb-3 stretched-link">{{ course.name_course }}</a>
 
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <a href="#" class="d-block text-uppercase mb-3 stretched-link">{{ course.name_course }}</a>
-
-                        {{ course.description_course|linebreaks }}
+                            {{ course.description_course|linebreaks }}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    {% endfor %}
-
-    <br>
-    <br>
-    <br>
-    <br>
+        {% endfor %}
+    </div>
     
     {% include 'partials/_footer.html' %}
 {% endblock %}
