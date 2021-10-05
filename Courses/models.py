@@ -17,9 +17,9 @@ class Course(models.Model):
     
     description_course = models.TextField(verbose_name='Descrição do curso')
     
-    image_course = models.ImageField(upload_to='course_img/%Y/%m/%d', verbose_name='Imagem')
+    image_course = models.ImageField(upload_to='course_img/%Y/%m/%d', verbose_name='Imagem', null=True, blank=True)
 
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Data de criação')
+    created_at = models.DateTimeField(auto_now_add= True, verbose_name='Data de criação')
     
     update_at = models.DateTimeField(auto_now=True, verbose_name='Data de atualização')
 
