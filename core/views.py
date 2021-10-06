@@ -5,18 +5,18 @@ from Courses.models import Course
 
 
 def home(request):
-    return render(request, 'home.html', {'home': 'home'})
+    return render(request, 'core/home.html', {'home': 'home'})
 
 
 def contact(request):
-    return render(request, 'contact.html', {'contact': 'contact'})
+    return render(request, 'core/contact.html', {'contact': 'contact'})
 
 
 def courses(request):
     courses = Course.objects.order_by('-id')
-    return render(request, 'courses.html', {'courses': courses})
+    return render(request, 'core/list_courses.html', {'courses': courses})
 
 
-def course_detail(request, id_course):
-    course = get_object_or_404(Course, id=id_course)
-    return render(request, 'course_detail.html', {'course': course})
+def course_detail(request, slug):
+    course = get_object_or_404(Course, slug_course=slug)
+    return render(request, 'core/detail_course.html', {'course': course})
