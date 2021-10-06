@@ -17,6 +17,6 @@ def courses(request):
     return render(request, 'core/list_courses.html', {'courses': courses})
 
 
-def course_detail(request, slug):
+def detail_course(request, slug):
     course = get_object_or_404(Course, slug_course=slug)
     return render(request, 'core/detail_course.html', {'course': course})
