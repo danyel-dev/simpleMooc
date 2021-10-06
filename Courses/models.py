@@ -11,11 +11,13 @@ class CourseManager(models.Manager):
 
 
 class Course(models.Model):
-    name_course = models.CharField(max_length=100, verbose_name='Nome do curso')
+    name_course = models.CharField(max_length=50, verbose_name='Nome do curso')
     
     slug_course = models.SlugField(verbose_name='Atalho')
     
-    description_course = models.TextField(verbose_name='Descrição do curso')
+    description_course = models.CharField(max_length=255, verbose_name='Descrição do curso')
+    
+    about_course = models.TextField(verbose_name='Sobre o curso')
     
     image_course = models.ImageField(upload_to='course_img/%Y/%m/%d', verbose_name='Imagem', null=True, blank=True)
 

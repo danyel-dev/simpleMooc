@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'title' %} {{ course }} {% endblock %}
+
+
+{% block 'content' %}
+    {% include 'partials/_header.html' %}
+
+    <div class="bg-light">
+        <div class="container pt-4 pb-4">
+            <h1 class="fs-1">{{ course }}</h1>
+            
+            <h2 class="text-muted fs-4">{{ course.description_course }}</h2>
+        
+            <button class="btn btn-primary mt-2">Inscreva-se</button>
+        </div>
+    </div>
+    
+    <div class="container card mt-5 border-0" style="max-width: 1140px; margin-bottom: 140px">
+        <div class="row g-0">
+            <div class="col-md-8">
+                <div class="card-body py-0">
+                    <p class="d-inline-block border-bottom text-uppercase text-muted pb-1">Sobre o Curso</p>
+
+                    <p class="card-text">{{ course.about_course }}</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                {% if course.image_course %}
+                    <img src="{{ course.image_course.url }}" class="img-fluid rounded-start" alt="{{ course.name_course }}">
+                {% else %}
+                    <img src="{% static 'img/unnamed.png' %}" class="img-fluid rounded-start" alt="{{ course.name_course }}">
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    {% include 'partials/_footer.html' %}
+{% endblock %}

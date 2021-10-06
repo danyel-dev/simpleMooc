@@ -15,7 +15,7 @@
         </div>
     </div>
     
-    <div class="courses" style="margin-bottom: 100px;">
+    <div class="container courses">
         {% for course in courses %}
             <div class="container card mt-5 border-0" style="max-width: 1140px;">
                 <div class="row g-0">
@@ -29,13 +29,17 @@
 
                     <div class="col-md-8">
                         <div class="card-body py-0">
-                            <a href="#" class="d-block text-uppercase mb-3 stretched-link">{{ course.name_course }}</a>
+                            <a href="{% url 'course-detail' course.id %}" class="d-block text-uppercase mb-3 stretched-link">
+                                {{ course.name_course }}
+                            </a>
 
-                            {{ course.description_course|linebreaks }}
+                            <p class="fw-bold">{{ course.description_course|linebreaks }}</p>
                         </div>
                     </div>
                 </div>
             </div>
+        {% empty %}
+            <h1 class="fs-2 mt-5">Nenhum curso está disponivel na plataforma</h1>
         {% endfor %}
     </div>
     
