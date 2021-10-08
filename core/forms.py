@@ -16,6 +16,11 @@ class ContactCourse(forms.Form):
         attrs={'class': 'form-control'}
     ))
     
-    email = forms.EmailField(label='Email')
-    message = forms.CharField(label='Message', widget=forms.Textarea)
+    email = forms.EmailField(label='Email', widget=forms.EmailInput(
+        attrs={'class': 'form-control'}
+    ))
+
+    message = forms.CharField(label='Message', widget=forms.Textarea(
+        attrs={'class': 'form-control'}
+    ))
  

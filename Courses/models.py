@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.utils.text import slugify
 
 
 class CourseManager(models.Manager):
@@ -31,6 +32,11 @@ class Course(models.Model):
 
     def __str__(self):
         return self.name_course
+
+
+    def save(self, *args, **kargs):
+        self.slug_course = slugify(self.name_course, allow_unicode=False)
+        super().save(*args, **kargs)
 
 
     def get_absolute_url(self):

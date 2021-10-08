@@ -10,7 +10,7 @@ class CourseAdmin(admin.ModelAdmin):
     list_per_page = 10
     search_fields = ('id', 'name_course', 'slug_course')
 
-    prepopulated_fields = {'slug_course': ('name_course',)}
+    # prepopulated_fields = {'slug_course': ('name_course',)}
 
 
 admin.site.register(Course, CourseAdmin)

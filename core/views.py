@@ -22,4 +22,11 @@ def detail_course(request, slug):
     course = get_object_or_404(Course, slug_course=slug)
     form = ContactCourse(request.POST or None)
 
-    return render(request, 'core/detail_course.html', {'course': course, 'form': form})
+    if request.method == 'POST':
+        if form.is_valid():
+            form = ContactCourse()
+
+    return render(request, 'core/detail_course.html', {
+        'course': course,
+        'form': form,
+    })

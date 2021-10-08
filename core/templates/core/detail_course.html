@@ -36,10 +36,10 @@
             </div>
         </div>
 
-        <div style="margin-top: 150px">
+        <div id="form-contact" style="margin-top: 150px">
             <h1 class="fs-3 mb-5">Tire suas dúvidas sobre o Curso</h1>
             
-            <form method="post">
+            <form method="post" action="#form-contact">
                 {% csrf_token %}
 
                 {% for field in form %}
