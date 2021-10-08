@@ -34,7 +34,11 @@ class Course(models.Model):
 
 
     def get_absolute_url(self):
-        return reverse('detailcourse', args=[self.slug_course])
+        return reverse('detail-course', args=[self.slug_course])
+
+
+    def hello(self):
+        return f'hello, {self.name_course}'
 
 
     class Meta:

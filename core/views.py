@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 
 from Courses.models import Course 
+from .forms import ContactCourse
 
 
 def home(request):
@@ -19,4 +20,6 @@ def courses(request):
 
 def detail_course(request, slug):
     course = get_object_or_404(Course, slug_course=slug)
-    return render(request, 'core/detail_course.html', {'course': course})
+    form = ContactCourse(request.POST or None)
+
+    return render(request, 'core/detail_course.html', {'course': course, 'form': form})
