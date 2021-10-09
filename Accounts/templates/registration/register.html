@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block 'title' %} Register {% endblock %}
+
+{% block 'content' %}
+    <div class="container d-flex flex-column justify-content-center align-items-center" style="height: 100vh; padding-bottom: 70px !important;">
+        <form method="POST" class="border border-1 p-3 bg-light">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}">
+        
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-primary">Entrar</button>
+            
+            <p class="mt-4">Já tem uma conta? <a href="{% url 'login' %}">Entrar</a> </p>
+        </form>
+    </div>
+{% endblock %}

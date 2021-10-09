@@ -1,12 +1,19 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
+{% block 'title' %} Login {% endblock %}
 
 {% block 'content' %}
-    <form method="POST">
-        {% csrf_token %}
-        <input type="hidden" name="next" value="{{ next }}">
+    <div class="container d-flex flex-column justify-content-center align-items-center" style="height: 100vh; padding-bottom: 70px !important;">
+        <form method="POST" class="border border-1 p-3 bg-light">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}">
         
-        {{ form }}
-        <button type="submit" class="btn btn-primary">Entrar</button>
-    </form>
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-primary">Entrar</button>
+        </form>
+
+        <small class="mt-4">Não é cadastrado? <a href="{% url 'register' %}">Cadastre-se</a> </small>
+        <small>Esqueceu a senha? <a href="#">Nova Senha</a> </small>
+    </div>
 {% endblock %}
