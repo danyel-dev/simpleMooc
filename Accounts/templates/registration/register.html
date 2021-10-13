@@ -4,7 +4,7 @@
 {% block 'title' %} Register {% endblock %}
 
 {% block 'content' %}
-    <div class="container d-flex flex-column justify-content-center align-items-center" style="height: 100vh; padding-bottom: 70px !important;">
+    <div class="container" style="height: 100vh; padding-bottom: 70px !important;">
         <form method="POST" class="border border-1 p-3 bg-light">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ next }}">
