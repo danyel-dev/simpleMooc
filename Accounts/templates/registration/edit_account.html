@@ -1,0 +1,20 @@
+{% extends 'registration/dashboard.html' %}
+
+{% block 'title' %} Edição de conta - {{ user }} {% endblock %}
+
+
+{% block 'breadcrumbs' %}
+    {{ block.super }}
+    <li>/</li>
+    <li class='fs-5'><a href="{% url 'edit_account' %}">Editar conta</a></li>
+{% endblock %}
+
+
+{% block 'dashboard-content' %} 
+    <form method="POST">
+        {% csrf_token %}
+        
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Salvar</button>
+    </form>
+{% endblock %}
