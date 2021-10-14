@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
 
 from .forms import RegisterForm, EditAccountForm
 
@@ -37,3 +38,17 @@ def edit_account(request):
             return redirect('/')
 
     return render(request, 'registration/edit_account.html', {'form': form})
+
+
+@login_required
+def edit_password(request):
+    form = PasswordChangeForm(user=request.user)
+    
+    if request.method == 'POST':
+        form = PasswordChangeForm(data=request.POST, user=request.user)
+
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+
+    return render(request, 'registration/edit_password.html', {'form': form})
