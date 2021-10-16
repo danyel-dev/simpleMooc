@@ -2,6 +2,8 @@ from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
 
+from django.conf import settings
+
 
 class CourseManager(models.Manager):
 
@@ -51,3 +53,22 @@ class Course(models.Model):
         verbose_name = 'curso'
         verbose_name_plural = 'cursos'
     
+
+class subscribe(models.Model):
+    STATUS_CHOICES = (
+        (0, 'Análise'),
+        (1, 'Aprovado'),
+        (2, 'Cancelado'),
+    )
+
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Usuário')
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name='Curso')
+    status = models.IntegerField(choices=STATUS_CHOICES, default=0, blank=True, verbose_name='Situação')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Criado em')
+    update_at = models.DateTimeField(auto_now=True, verbose_name='Atualizado em')
+
+
+    class Meta:
+        verbose_name = 'Inscrição'
+        verbose_name_plural = 'Inscrições'
+        unique_together = (('user', 'course'),)

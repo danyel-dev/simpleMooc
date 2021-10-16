@@ -25,7 +25,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
     def __str__(self):
-        return self.full_name or self.username
+        return self.username
 
 
     def get_short_name(self):
