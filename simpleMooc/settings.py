@@ -145,4 +145,17 @@ LOGOUT_REDIRECT_URL = 'login'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
+
 AUTH_USER_MODEL = 'Accounts.User'
+
+
+from django.contrib.messages import constants
+
+
+MESSAGE_TAGS = {
+    constants.ERROR: 'alert alert-danger',
+    constants.DEBUG: 'alert alert-info',
+    constants.INFO: 'alert alert-primary',
+    constants.SUCCESS: 'alert alert-success',
+    constants.WARNING: 'alert alert-warning',
+}

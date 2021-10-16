@@ -6,6 +6,8 @@
     {% include 'partials/_header.html' %}
 
     <div class="container">
+        {% include 'partials/_messages.html' %}
+
         <ul class="d-flex align-items-center my-4 p-0" style="list-style: none; gap: 1rem">
             {% block 'breadcrumbs' %}
                 <li class='fs-5'><a href="{% url 'dashboard' %}">Meu painel</a></li>
