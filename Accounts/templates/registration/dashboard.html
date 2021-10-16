@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load courses_tags %}
+
 
 {% block 'title' %} Dashboard - {{ user }} {% endblock %}
 
@@ -24,8 +26,7 @@
         <div class="border border-1 mt-5 p-3">
             <div>
                 <h1 class="fs-3">Meus cursos</h1>
-                <p>Curso 1</p>
-                <p>Curso 2</p>
+                {% user_courses user %}
             </div>
 
             <div>

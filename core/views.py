@@ -43,5 +43,7 @@ def subscribe_course(request, slug):
         messages.success(request, 'Inscrição realizada com sucesso!')
         # Subscribe.active()
         # Subscribe.save()
-    
+    else:
+        messages.error(request, 'Você já está inscrito nesse curso')
+
     return redirect('dashboard')

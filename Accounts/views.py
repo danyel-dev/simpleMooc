@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 
 from .forms import RegisterForm, EditAccountForm
+from Courses.models import subscribe
 
 
 def register(request):
@@ -23,7 +24,8 @@ def register(request):
 
 @login_required
 def dashboard(request):
-    return render(request, 'registration/dashboard.html')
+    registrations = subscribe.objects.order_by('-id').filter(user=request.user)
+    return render(request, 'registration/dashboard.html', {'registrations': registrations})
 
 
 @login_required

@@ -1,0 +1,5 @@
+{% for subscribe in registrations %}
+    <p><a href="{{ subscribe.course.get_absolute_url }}">{{ subscribe.course }}</a></p>
+{% empty %}
+    <p>Você não está escrito em nenhum curso</p>
+{% endfor %}
