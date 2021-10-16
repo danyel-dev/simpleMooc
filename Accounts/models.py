@@ -1,11 +1,17 @@
 from django.db import models
-
+import re
+from django.core import validators
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
 
 
 class User(AbstractBaseUser, PermissionsMixin):
 
-    username = models.CharField(max_length=50, verbose_name='Nome de usuário', unique=True)
+    username = models.CharField(max_length=50, verbose_name='Nome de usuário', unique=True, 
+        validators=[validators.RegexValidator(re.compile('^[\w.@+-]+$'),
+        'O nome de usuário só pode conter letras números, ou os seguintes caracteres: @/./+/-/_',
+        'invalid')]
+    )
+
     email = models.EmailField(unique=True, verbose_name='E-mail')
     full_name = models.CharField(max_length=100, blank=True, verbose_name='Nome completo')
     is_active = models.BooleanField(blank=True, default=True, verbose_name='Está ativo?')
