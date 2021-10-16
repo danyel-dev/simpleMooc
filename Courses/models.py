@@ -17,7 +17,7 @@ class CourseManager(models.Manager):
 class Course(models.Model):
     name_course = models.CharField(max_length=50, verbose_name='Nome do curso')
     
-    slug_course = models.SlugField(verbose_name='Atalho')
+    slug_course = models.SlugField(verbose_name='Atalho', blank=True)
     
     description_course = models.CharField(max_length=255, verbose_name='Descrição do curso')
     
@@ -63,9 +63,18 @@ class subscribe(models.Model):
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Usuário')
     course = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name='Curso')
-    status = models.IntegerField(choices=STATUS_CHOICES, default=0, blank=True, verbose_name='Situação')
+    status = models.IntegerField(choices=STATUS_CHOICES, default=1, blank=True, verbose_name='Situação')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Criado em')
     update_at = models.DateTimeField(auto_now=True, verbose_name='Atualizado em')
+
+
+    def active(self):
+        self.status = 1
+        self.save()
+
+
+    def __str__(self):
+        return str(self.user)
 
 
     class Meta:

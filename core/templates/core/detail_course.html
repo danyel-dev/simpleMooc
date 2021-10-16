@@ -13,7 +13,7 @@
             
             <h2 class="text-muted fs-4">{{ course.description_course }}</h2>
         
-            <button class="btn btn-primary mt-2">Inscreva-se</button>
+            <a href="{% url 'subscribe_course' course.slug_course %}"><button class="btn btn-primary mt-2">Inscreva-se</button></a>
         </div>
     </div>
     

@@ -1,7 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 
-from Courses.models import Course 
+from Courses.models import Course, subscribe 
 from .forms import ContactCourse
 
 
@@ -30,3 +31,14 @@ def detail_course(request, slug):
         'course': course,
         'form': form,
     })
+
+
+@login_required
+def subscribe_course(request, slug):
+    course = get_object_or_404(Course, slug_course=slug)
+    Subscribe, create = subscribe.objects.get_or_create(user=request.user, course=course)
+    print(create)
+    # if create:
+    #     Subscribe.active()
+    #     Subscribe.save()
+    return redirect('dashboard')
