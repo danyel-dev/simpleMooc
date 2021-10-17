@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load courses_tags %}
-{% load_user_courses user as registrations %}
 
 
 {% block 'title' %} Dashboard - {{ user }} {% endblock %}
@@ -34,11 +33,15 @@
                             <p class="mb-0 text-uppercase">Configurações de conta</p>
                             
                             <li class="nav-item">
-                                <a class="nav-link px-0 link-secondary pb-0" href="{% url 'edit_account' %}">Editar informações</a>
+                                <a class="nav-link px-0 link-secondary pb-0" href="{% url 'edit_account' %}">
+                                    <i class="fas fa-cog"></i> Editar informações
+                                </a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link px-0 link-secondary pb-0" href="{% url 'edit_password' %}">Editar Senha</a>
+                                <a class="nav-link px-0 link-secondary pb-0" href="{% url 'edit_password' %}">
+                                    <i class="fas fa-lock"></i> Editar Senha
+                                </a>
                             </li>
                         </ul>
                     {% endblock %}
@@ -50,6 +53,8 @@
                     <h1 class="fs-3 mb-3">Meus Cursos</h1>
                     
                     <div class="d-flex flex-column gap-3">
+                        {% load_user_courses user as registrations %}
+                        
                         {% for subscribe in registrations %}
                             <div class="border border-1 p-3">
                                 <h2 class="fs-4"><a href="" class="text-decoration-none">{{ subscribe.course }}</a></h2>
@@ -58,9 +63,12 @@
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt maiores quia voluptatem aspernatur, voluptatum sequi optio non repudiandae magni dicta quis sed amet ullam provident tempora natus perspiciatis expedita fugit.</p>
                                 
                                 <div class="d-flex gap-2">
-                                    <button class="btn btn-primary py-1">
-                                        <a href="{{ subscribe.course.course_user_url }}">Acessar</a>
-                                    </button>
+                                    <a href="{{ subscribe.course.course_user_url }}">
+                                        <button class="btn btn-primary py-1">
+                                            Acessar
+                                        </button>
+                                    </a>
+
                                     <button class="btn btn-danger py-1">Cancelar</button>
                                 </div>
                             </div>

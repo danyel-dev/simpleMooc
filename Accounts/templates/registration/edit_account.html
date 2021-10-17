@@ -1,4 +1,5 @@
 {% extends 'registration/dashboard.html' %}
+
 {% block 'title' %} Edição de conta - {{ user }} {% endblock %}
 
 
@@ -6,10 +7,6 @@
     {{ block.super }}
     <li><a href="{% url 'edit_account' %}" class="text-decoration-none">Editar conta</a></li>
     <li>/</li>
-{% endblock %}
-
-{% block 'dashboard-aside' %}
-    {{ block.super }}
 {% endblock %}
 
 {% block 'dashboard-main' %} 
