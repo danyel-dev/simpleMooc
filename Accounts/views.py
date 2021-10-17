@@ -54,3 +54,8 @@ def edit_password(request):
             return redirect('/')
 
     return render(request, 'registration/edit_password.html', {'form': form})
+
+
+@login_required
+def course_user(request, slug):
+    return render(request, 'registration/course-user.html')

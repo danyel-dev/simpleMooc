@@ -1,38 +1,72 @@
 {% extends 'base.html' %}
 {% load courses_tags %}
+{% load_user_courses user as registrations %}
 
 
 {% block 'title' %} Dashboard - {{ user }} {% endblock %}
 
-{% block 'content' %}
+{% block 'content' %} 
     {% include 'partials/_header.html' %}
-
+   
     <div class="container">
         {% include 'partials/_messages.html' %}
 
-        <ul class="d-flex align-items-center my-4 p-0" style="list-style: none; gap: 1rem">
+        <ul class="d-flex align-items-center my-4 p-0 gap-2" style="list-style: none;">
             {% block 'breadcrumbs' %}
-                <li class='fs-5'><a href="{% url 'dashboard' %}">Meu painel</a></li>
+                <li><a href="{% url 'dashboard' %}" class="text-decoration-none">Meu painel</a></li>
+                <li>/</li>
             {% endblock %}
         </ul>
 
-        <div>
-            {% block 'dashboard-content' %}
-                <p>Nome: {{ user.first_name }} {{ user.last_name }}</p>
-                <p>E-mail: {{ user.email }}</p>
-            {% endblock %}
-        </div>
+        <div class="row mb-5">
+            <div class="col-3 p-0 d-block border border-1" style="margin-right: 50px; height: max-content;">
+                <p class="text-uppercase fw-bold px-3 py-2 m-0 border-bottom">bem-vindo, {{ user.username }}</p>
+                
+                <div class="d-flex flex-column">
+                    {% block 'dashboard-aside' %}
+                        <ul class="nav flex-column border-bottom px-3 py-2">
+                            <p class="mb-0 text-uppercase">Cursos</p>
+                            
+                            {% user_courses user %}                            
+                        </ul>
+ 
+                        <ul class="nav flex-column px-3 py-2">
+                            <p class="mb-0 text-uppercase">Configurações de conta</p>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link px-0 link-secondary pb-0" href="{% url 'edit_account' %}">Editar informações</a>
+                            </li>
 
-        <div class="border border-1 mt-5 p-3">
-            <div>
-                <h1 class="fs-3">Meus cursos</h1>
-                {% user_courses user %}
+                            <li class="nav-item">
+                                <a class="nav-link px-0 link-secondary pb-0" href="{% url 'edit_password' %}">Editar Senha</a>
+                            </li>
+                        </ul>
+                    {% endblock %}
+                </div>
             </div>
 
-            <div>
-                <h1>Minha Conta</h1>
-                <p><a href="{% url 'edit_account' %}">Editar Conta</a></p>
-                <p><a href="{% url 'edit_password' %}">Editar Senha</a></p>
+            <div class="col">
+                {% block 'dashboard-main' %}
+                    <h1 class="fs-3 mb-3">Meus Cursos</h1>
+                    
+                    <div class="d-flex flex-column gap-3">
+                        {% for subscribe in registrations %}
+                            <div class="border border-1 p-3">
+                                <h2 class="fs-4"><a href="" class="text-decoration-none">{{ subscribe.course }}</a></h2>
+                                <small class="text-muted d-block mb-2">{{ subscribe.course.created_at }}</small>   
+
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt maiores quia voluptatem aspernatur, voluptatum sequi optio non repudiandae magni dicta quis sed amet ullam provident tempora natus perspiciatis expedita fugit.</p>
+                                
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-primary py-1">
+                                        <a href="{{ subscribe.course.course_user_url }}">Acessar</a>
+                                    </button>
+                                    <button class="btn btn-danger py-1">Cancelar</button>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endblock %}
             </div>
         </div>
     </div>

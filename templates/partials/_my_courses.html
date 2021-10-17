@@ -1,5 +1,9 @@
 {% for subscribe in registrations %}
-    <p><a href="{{ subscribe.course.get_absolute_url }}">{{ subscribe.course }}</a></p>
+    <li class="nav-item">
+        <a class="nav-link px-0 link-secondary pb-0" aria-current="page" href="{{ subscribe.course.get_absolute_url }}">
+            <i class="fas fa-book" style="font-size: 14px"></i> {{ subscribe.course }}
+        </a>
+    </li>
 {% empty %}
     <p>Você não está escrito em nenhum curso</p>
 {% endfor %}
