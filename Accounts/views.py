@@ -1,11 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 
 from .forms import RegisterForm, EditAccountForm
-from Courses.models import subscribe
+from Courses.models import subscribe, Course
 
 
 def register(request):
@@ -58,4 +58,5 @@ def edit_password(request):
 
 @login_required
 def course_user(request, slug):
-    return render(request, 'registration/course-user.html')
+    course = get_object_or_404(Course, slug_course=slug)
+    return render(request, 'registration/course-user.html', {'course': course})

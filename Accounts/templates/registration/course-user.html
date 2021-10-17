@@ -1,31 +1,37 @@
 {% extends 'registration/dashboard.html' %}
 {% load courses_tags %}
 
+{% block 'breadcrumbs' %}
+    {{ block.super }}
+    <li><a href="{{ course.course_user_url }}" class="text-decoration-none">{{ course }}</a></li>
+    <li>/</li>
+{% endblock %}
+
 {% block 'dashboard-aside' %}
     <ul class="nav flex-column px-3 py-2">
-        <p class="mb-0 text-uppercase">Configurações de conta</p>
+        <p class="mb-0 text-uppercase">{{ course }}</p>
         
         <li class="nav-item">
             <a class="nav-link px-0 link-secondary pb-0" href="{% url 'edit_account' %}">
-                <i class="fas fa-video"></i> Aulas e Materiais
+                <i class="fas fa-video" style="font-size: 14px"></i> Aulas e Materiais
             </a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link px-0 link-secondary pb-0" href="{% url 'edit_password' %}">
-                <i class="fas fa-info-circle"></i> Informações
+                <i class="fas fa-info-circle" style="font-size: 14px"></i> Informações
             </a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link px-0 link-secondary pb-0" href="{% url 'edit_password' %}">
-                <i class="fas fa-envelope"></i> Anúncios
+                <i class="fas fa-envelope" style="font-size: 14px"></i> Anúncios
             </a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link px-0 link-secondary pb-0" href="{% url 'edit_password' %}">
-                <i class="fas fa-comments"></i> Forúm de Dúvidas
+                <i class="fas fa-comments" style="font-size: 14px"></i> Forúm de Dúvidas
             </a>
         </li>
     </ul>
@@ -45,7 +51,7 @@
 
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt maiores quia voluptatem aspernatur, voluptatum sequi optio non repudiandae magni dicta quis sed amet ullam provident tempora natus perspiciatis expedita fugit.</p>
                 
-                <a href="#">5 Comentários</a>
+                <i class="fas fa-comment text-secondary"></i> <a href="#" class="text-decoration-none text-muted">5 Comentários</a>
             </div>
         {% endfor %}
     </div>

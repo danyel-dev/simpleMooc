@@ -21,31 +21,29 @@
             <div class="col-3 p-0 d-block border border-1" style="margin-right: 50px; height: max-content;">
                 <p class="text-uppercase fw-bold px-3 py-2 m-0 border-bottom">bem-vindo, {{ user.username }}</p>
                 
-                <div class="d-flex flex-column">
-                    {% block 'dashboard-aside' %}
-                        <ul class="nav flex-column border-bottom px-3 py-2">
-                            <p class="mb-0 text-uppercase">Cursos</p>
-                            
-                            {% user_courses user %}                            
-                        </ul>
- 
-                        <ul class="nav flex-column px-3 py-2">
-                            <p class="mb-0 text-uppercase">Configurações de conta</p>
-                            
-                            <li class="nav-item">
-                                <a class="nav-link px-0 link-secondary pb-0" href="{% url 'edit_account' %}">
-                                    <i class="fas fa-cog"></i> Editar informações
-                                </a>
-                            </li>
+                {% block 'dashboard-aside' %}
+                    <ul class="nav flex-column border-bottom px-3 py-2">
+                        <p class="mb-0 text-uppercase">Cursos</p>
+                        
+                        {% user_courses user %}                            
+                    </ul>
 
-                            <li class="nav-item">
-                                <a class="nav-link px-0 link-secondary pb-0" href="{% url 'edit_password' %}">
-                                    <i class="fas fa-lock"></i> Editar Senha
-                                </a>
-                            </li>
-                        </ul>
-                    {% endblock %}
-                </div>
+                    <ul class="nav flex-column px-3 py-2">
+                        <p class="mb-0 text-uppercase">Configurações de conta</p>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link px-0 link-secondary pb-0" href="{% url 'edit_account' %}">
+                                <i class="fas fa-cog" style="font-size: 14px"></i> Editar informações
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link px-0 link-secondary pb-0" href="{% url 'edit_password' %}">
+                                <i class="fas fa-lock" style="font-size: 14px"></i> Editar Senha
+                            </a>
+                        </li>
+                    </ul>
+                {% endblock %}
             </div>
 
             <div class="col">
@@ -57,7 +55,7 @@
                         
                         {% for subscribe in registrations %}
                             <div class="border border-1 p-3">
-                                <h2 class="fs-4"><a href="" class="text-decoration-none">{{ subscribe.course }}</a></h2>
+                                <h2 class="fs-4"><a href="#" class="text-decoration-none">{{ subscribe.course }}</a></h2>
                                 <small class="text-muted d-block mb-2">{{ subscribe.course.created_at }}</small>   
 
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt maiores quia voluptatem aspernatur, voluptatum sequi optio non repudiandae magni dicta quis sed amet ullam provident tempora natus perspiciatis expedita fugit.</p>
