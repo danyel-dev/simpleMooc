@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib import messages
 
 from .forms import RegisterForm, EditAccountForm
 from Courses.models import subscribe, Course
@@ -59,4 +60,10 @@ def edit_password(request):
 @login_required
 def course_user(request, slug):
     course = get_object_or_404(Course, slug_course=slug)
+    Subscriber = get_object_or_404(subscribe, user=request.user, course=course)
+
+    if not Subscriber.is_approved():
+        messages.error(request, 'Sua inscrição está pendente')
+        return redirect('dashboard')
+    
     return render(request, 'registration/course-user.html', {'course': course})

@@ -48,11 +48,6 @@ class Course(models.Model):
     def course_user_url(self):
         return reverse('course-user', args=[self.slug_course])
 
-
-    def hello(self):
-        return f'hello, {self.name_course}'
-
-
     class Meta:
         verbose_name = 'curso'
         verbose_name_plural = 'cursos'
@@ -75,6 +70,10 @@ class subscribe(models.Model):
     def active(self):
         self.status = 1
         self.save()
+
+
+    def is_approved(self):
+        return self.status == 1
 
 
     def __str__(self):
