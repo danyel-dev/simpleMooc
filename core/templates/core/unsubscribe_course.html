@@ -1,0 +1,19 @@
+{% extends 'registration/course-user.html' %}
+
+
+{% block 'breadcrumbs' %}
+    {{ block.super }}
+    <li><a href="{% url 'unsubscribe-course' course.slug_course %}" class="text-decoration-none">Cancelar inscrição</a></li>
+    <li>/</li>
+{% endblock %}
+
+
+{% block 'dashboard-main' %}
+    <h4 class="fw-normal">Deseja cancelar a inscrição no curso <strong>{{ course }}</strong>?</h4>
+    <a href="?cancel=true">
+        <button class="btn btn-primary px-2 py-1">Confirmar</button>
+    </a>
+    <a href="?cancel=false">
+        <button class="btn btn-secondary px-2 py-1">Voltar</button>
+    </a>
+{% endblock %}

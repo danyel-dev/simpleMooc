@@ -67,7 +67,11 @@
                                         </button>
                                     </a>
 
-                                    <button class="btn btn-danger py-1">Cancelar</button>
+                                    <a href="{% url 'unsubscribe-course' subscribe.course.slug_course %}">
+                                        <button class="btn btn-danger py-1">
+                                            Cancelar
+                                        </button>
+                                    </a>
                                 </div>
                             </div>
                         {% endfor %}

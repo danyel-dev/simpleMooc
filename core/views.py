@@ -47,3 +47,18 @@ def subscribe_course(request, slug):
         messages.error(request, 'Você já está inscrito nesse curso')
 
     return redirect('dashboard')
+
+
+@login_required
+def unsubscribe_course(request, slug):
+    course = get_object_or_404(Course, slug_course=slug)
+    Subscribe = get_object_or_404(subscribe, user=request.user, course=course)
+
+    cancel = request.GET.get('cancel')
+
+    if cancel:
+        if cancel == 'true':
+            Subscribe.delete()
+        return redirect('dashboard')
+
+    return render(request, 'core/unsubscribe_course.html', {'course': course})
