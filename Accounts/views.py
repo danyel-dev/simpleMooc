@@ -6,7 +6,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 
 from .forms import RegisterForm, EditAccountForm
-from Courses.models import subscribe, Course
+from Courses.models import subscribe, Course, Advert, Comment
 
 
 def register(request):
@@ -61,9 +61,11 @@ def edit_password(request):
 def course_user(request, slug):
     course = get_object_or_404(Course, slug_course=slug)
     Subscriber = get_object_or_404(subscribe, user=request.user, course=course)
+    
+    adverts = course.Adverts.all()
 
     if not Subscriber.is_approved():
         messages.error(request, 'Sua inscrição está pendente')
         return redirect('dashboard')
     
-    return render(request, 'registration/course-user.html', {'course': course})
+    return render(request, 'registration/course-user.html', {'course': course, 'adverts': adverts})

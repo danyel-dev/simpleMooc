@@ -1,5 +1,5 @@
 {% extends 'registration/dashboard.html' %}
-{% load courses_tags %}
+
 
 {% block 'breadcrumbs' %}
     {{ block.super }}
@@ -42,16 +42,21 @@
     <h1 class="fs-3 mb-3">Anúncios</h1>
                         
     <div class="d-flex flex-column gap-3">
-        {% load_user_courses user as registrations %}
-        
-        {% for subscribe in registrations %}
+        {% for advert in adverts %}
             <div class="border border-1 p-3">
-                <h2 class="fs-4"><a href="" class="text-decoration-none">{{ subscribe.course }}</a></h2>
-                <small class="text-muted d-block mb-2">{{ subscribe.course.created_at }}</small>   
+                <h2 class="fs-4">
+                    <a href="" class="text-decoration-none">{{ advert.title }}</a>
+                </h2>
+                <small class="text-muted d-block mb-2">{{ advert.created_at }}</small>   
 
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt maiores quia voluptatem aspernatur, voluptatum sequi optio non repudiandae magni dicta quis sed amet ullam provident tempora natus perspiciatis expedita fugit.</p>
+                <p>{{ advert.content }}</p>
                 
-                <i class="fas fa-comment text-secondary"></i> <a href="#" class="text-decoration-none text-muted">5 Comentários</a>
+                <i class="fas fa-comment text-secondary"></i> 
+                <a href="#" class="text-decoration-none text-muted">
+                    {% with comments_count=advert.Comments.count %}
+                        {{ comments_count }} Comentário{{ comments_count|pluralize }}
+                    {% endwith %}
+                </a>
             </div>
         {% endfor %}
     </div>

@@ -87,7 +87,7 @@ class subscribe(models.Model):
 
 
 class Advert(models.Model):
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name='Curso')
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name='Curso', related_name='Adverts')
     title = models.CharField(max_length=100, verbose_name='Título do anúncio')
     content = models.TextField(verbose_name='Conteúdo')
 
@@ -105,7 +105,7 @@ class Advert(models.Model):
 
 
 class Comment(models.Model):
-    advert = models.ForeignKey(Advert, on_delete=models.CASCADE, verbose_name='Anúncio')
+    advert = models.ForeignKey(Advert, on_delete=models.CASCADE, verbose_name='Anúncio', related_name='Comments')
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='usuário')
     comment = models.TextField(verbose_name='Comentário')
 
