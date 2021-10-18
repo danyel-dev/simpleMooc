@@ -57,8 +57,7 @@ def unsubscribe_course(request, slug):
     cancel = request.GET.get('cancel')
 
     if cancel:
-        if cancel == 'true':
-            Subscribe.delete()
+        Subscribe.delete()
         return redirect('dashboard')
 
     return render(request, 'core/unsubscribe_course.html', {'course': course})

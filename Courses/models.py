@@ -84,3 +84,35 @@ class subscribe(models.Model):
         verbose_name = 'Inscrição'
         verbose_name_plural = 'Inscrições'
         unique_together = (('user', 'course'),)
+
+
+class Advert(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name='Curso')
+    title = models.CharField(max_length=100, verbose_name='Título do anúncio')
+    content = models.TextField(verbose_name='Conteúdo')
+
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Criado em')
+    update_at = models.DateTimeField(auto_now=True, verbose_name='Atualizado em')
+
+
+    def __str__(self):
+        return self.title
+
+
+    class Meta:
+        verbose_name = 'Anúncio'
+        verbose_name_plural = 'Anúncios'
+
+
+class Comment(models.Model):
+    advert = models.ForeignKey(Advert, on_delete=models.CASCADE, verbose_name='Anúncio')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='usuário')
+    comment = models.TextField(verbose_name='Comentário')
+
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Criado em')
+    update_at = models.DateTimeField(auto_now=True, verbose_name='Atualizado em')
+
+
+    class Meta:
+        verbose_name = 'Comentário'
+        verbose_name_plural = 'Comentários'
