@@ -1,0 +1,33 @@
+{% extends 'registration/course_adverts.html' %}
+
+
+{% block 'breadcrumbs' %}
+    {{ block.super }}
+    <li><a href="{{ course.course_adverts_url }}" class="text-decoration-none">{{ advert }}</a></li>
+    <li>/</li>
+{% endblock %}
+
+{% block 'dashboard-main' %}
+    <div class="border border-1 px-3 py-2">
+        <h1 class="fs-3 mb-3">{{ advert }}</h1>
+
+        <p>{{ advert.content|linebreaks }}</p>
+        <small class="text-muted">{{ advert.created_at }}</small>   
+    </div>
+
+    <div class='mt-3 d-flex flex-column gap-4 border border-1 p-2'>
+        {% with comments_count=advert.Comments.count %}
+            <h1 class="fs-5 text-muted">{{ comments_count }} Comentário{{ comments_count|pluralize }}</h1>
+        {% endwith %}
+
+        {% for comment in advert.Comments.all %}
+            <div style="border-top: 2px solid rgba(0, 0, 0, 0.3); padding-top: 5px;">
+                <small>
+                    <span class='fw-bold text-muted'>{{ comment.user }}</span> disse ah {{ comment.created_at|timesince }} atrás:
+                </small>
+        
+                <p class="m-0 fw-bold">{{ comment.comment }}</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -68,4 +68,18 @@ def course_adverts(request, slug):
         messages.error(request, 'Sua inscrição está pendente')
         return redirect('dashboard')
     
-    return render(request, 'registration/course-adverts.html', {'course': course, 'adverts': adverts})
+    return render(request, 'registration/course_adverts.html', {'course': course, 'adverts': adverts})
+
+
+@login_required
+def detail_advert(request, slug, id_advert):
+    course = get_object_or_404(Course, slug_course=slug)
+    Subscriber = get_object_or_404(subscribe, user=request.user, course=course)
+
+    if not Subscriber.is_approved():
+        messages.error(request, 'Sua inscrição está pendente')
+        return redirect('dashboard')
+
+    advert = get_object_or_404(Advert, pk=id_advert)
+
+    return render(request, 'registration/detail_advert.html', {'course': course, 'advert': advert})

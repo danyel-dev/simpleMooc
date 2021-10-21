@@ -1,6 +1,5 @@
 {% extends 'registration/dashboard.html' %}
 
-
 {% block 'breadcrumbs' %}
     {{ block.super }}
     <li><a href="{{ course.course_adverts_url }}" class="text-decoration-none">{{ course }}</a></li>
@@ -45,7 +44,7 @@
         {% for advert in adverts %}
             <div class="border border-1 p-3">
                 <h2 class="fs-4">
-                    <a href="" class="text-decoration-none">{{ advert.title }}</a>
+                    <a href="{% url 'detail-advert' course.slug_course advert.id %}" class="text-decoration-none">{{ advert.title }}</a>
                 </h2>
                 <small class="text-muted d-block mb-2">{{ advert.created_at }}</small>   
 
