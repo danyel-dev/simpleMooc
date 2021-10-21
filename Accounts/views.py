@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 
-from .forms import RegisterForm, EditAccountForm
+from .forms import RegisterForm, EditAccountForm, CommentForm
 from Courses.models import subscribe, Course, Advert, Comment
 
 
@@ -75,6 +75,7 @@ def course_adverts(request, slug):
 def detail_advert(request, slug, id_advert):
     course = get_object_or_404(Course, slug_course=slug)
     Subscriber = get_object_or_404(subscribe, user=request.user, course=course)
+    comment_form = CommentForm(request.POST or None)
 
     if not Subscriber.is_approved():
         messages.error(request, 'Sua inscrição está pendente')
@@ -82,4 +83,12 @@ def detail_advert(request, slug, id_advert):
 
     advert = get_object_or_404(Advert, pk=id_advert)
 
-    return render(request, 'registration/detail_advert.html', {'course': course, 'advert': advert})
+    if request.method == 'POST':
+        comment = comment_form.save(commit=False)
+        comment.advert = advert
+        comment.user = request.user
+        comment.save()
+        
+        comment_form = CommentForm()
+
+    return render(request, 'registration/detail_advert.html', {'course': course, 'advert': advert, 'comment_form': comment_form})

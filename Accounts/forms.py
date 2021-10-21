@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth import get_user_model
 
+from Courses.models import Comment
+
 User = get_user_model()
 
 
@@ -45,4 +47,10 @@ class EditAccountForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'full_name')
-        
+
+
+class CommentForm(forms.ModelForm):
+
+    class Meta:
+        model = Comment
+        fields = ('comment',)

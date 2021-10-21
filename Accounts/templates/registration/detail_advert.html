@@ -15,7 +15,7 @@
         <small class="text-muted">{{ advert.created_at }}</small>   
     </div>
 
-    <div class='mt-3 d-flex flex-column gap-4 border border-1 p-2'>
+    <div class='mt-3 d-flex flex-column gap-4 border border-1 px-3 py-2'>
         {% with comments_count=advert.Comments.count %}
             <h1 class="fs-5 text-muted">{{ comments_count }} Comentário{{ comments_count|pluralize }}</h1>
         {% endwith %}
@@ -23,11 +23,22 @@
         {% for comment in advert.Comments.all %}
             <div style="border-top: 2px solid rgba(0, 0, 0, 0.3); padding-top: 5px;">
                 <small>
-                    <span class='fw-bold text-muted'>{{ comment.user }}</span> disse ah {{ comment.created_at|timesince }} atrás:
+                    <span class='fw-bold text-muted'>{{ comment.user }}, </span> {{ comment.created_at|timesince }} atrás:
                 </small>
         
                 <p class="m-0 fw-bold">{{ comment.comment }}</p>
             </div>
         {% endfor %}
+
+        <form method="post">
+            {% csrf_token %}
+
+            {% for field in comment_form %}
+                <p>{{ field.label_tag }}</p>
+                {{ field }}
+            {% endfor %}
+
+            <p><button class="btn btn-primary">Enviar</button></p>
+        </form>
     </div>
 {% endblock %}
