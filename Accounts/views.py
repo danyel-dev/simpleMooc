@@ -58,7 +58,7 @@ def edit_password(request):
 
 
 @login_required
-def course_user(request, slug):
+def course_adverts(request, slug):
     course = get_object_or_404(Course, slug_course=slug)
     Subscriber = get_object_or_404(subscribe, user=request.user, course=course)
     
@@ -68,4 +68,4 @@ def course_user(request, slug):
         messages.error(request, 'Sua inscrição está pendente')
         return redirect('dashboard')
     
-    return render(request, 'registration/course-user.html', {'course': course, 'adverts': adverts})
+    return render(request, 'registration/course-adverts.html', {'course': course, 'adverts': adverts})

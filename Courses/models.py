@@ -45,8 +45,8 @@ class Course(models.Model):
         return reverse('detail-course', args=[self.slug_course])
 
 
-    def course_user_url(self):
-        return reverse('course-user', args=[self.slug_course])
+    def course_adverts_url(self):
+        return reverse('course-adverts', args=[self.slug_course])
 
     class Meta:
         verbose_name = 'curso'
