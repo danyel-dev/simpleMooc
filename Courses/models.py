@@ -53,6 +53,48 @@ class Course(models.Model):
         verbose_name_plural = 'cursos'
     
 
+class Lesson(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name='Curso', related_name='Lessons')
+
+    name = models.CharField(max_length=100, verbose_name='Título')
+    description = models.TextField(verbose_name='Descrição')
+    release_data = models.DateField('Data de liberação', blank=True, null=True)
+
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Criado em')
+    update_at = models.DateTimeField(auto_now=True, verbose_name='Atualizado em')
+
+
+    def __str__(self):
+        return self.name
+    
+
+    class Meta:
+        verbose_name = 'Aula'
+        verbose_name_plural = 'Aulas'
+
+
+class Material(models.Model):
+    
+    name = models.CharField('Nome', max_length=100)
+    embedded = models.TextField('Video embutido', blank=True)
+    file = models.FileField('Arquivo', upload_to='lessons/materials', blank=True, null=True)
+
+    lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
+
+
+    def is_embedded(self):
+        return bool(self.embedded)
+
+
+    def __str__(self):
+        return self.name
+
+
+    class Meta:
+        verbose_name = 'Material'
+        verbose_name_plural = 'Materials'
+
+
 class subscribe(models.Model):
     STATUS_CHOICES = (
         (0, 'Análise'),

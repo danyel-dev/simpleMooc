@@ -75,6 +75,7 @@ def course_adverts(request, slug):
 def detail_advert(request, slug, id_advert):
     course = get_object_or_404(Course, slug_course=slug)
     Subscriber = get_object_or_404(subscribe, user=request.user, course=course)
+    
     comment_form = CommentForm(request.POST or None)
 
     if not Subscriber.is_approved():
@@ -84,11 +85,14 @@ def detail_advert(request, slug, id_advert):
     advert = get_object_or_404(Advert, pk=id_advert)
 
     if request.method == 'POST':
-        comment = comment_form.save(commit=False)
-        comment.advert = advert
-        comment.user = request.user
-        comment.save()
-        
-        comment_form = CommentForm()
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.advert = advert
+            comment.user = request.user
+            comment.save()
+            
+            messages.success(request, 'Seu comentário foi enviado com sucesso')
+            comment_form = CommentForm()
+            return redirect('detail-advert', slug, id_advert)
 
     return render(request, 'registration/detail_advert.html', {'course': course, 'advert': advert, 'comment_form': comment_form})
