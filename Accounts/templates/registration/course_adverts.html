@@ -11,7 +11,7 @@
         <p class="mb-0 text-uppercase">{{ course }}</p>
         
         <li class="nav-item">
-            <a class="nav-link px-0 link-secondary pb-0" href="{% url 'edit_account' %}">
+            <a class="nav-link px-0 link-secondary pb-0" href="{% url 'lessons' course.slug_course %}">
                 <i class="fas fa-video" style="font-size: 14px"></i> Aulas e Materiais
             </a>
         </li>

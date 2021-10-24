@@ -4,6 +4,8 @@ from django.utils.text import slugify
 
 from django.conf import settings
 
+from django.utils import timezone
+
 
 class CourseManager(models.Manager):
 
@@ -45,8 +47,14 @@ class Course(models.Model):
         return reverse('detail-course', args=[self.slug_course])
 
 
+    def release_lessons(self):
+        today = timezone.now().date()
+        return self.Lessons.filter(release_data__lte=today)
+
+
     def course_adverts_url(self):
         return reverse('course-adverts', args=[self.slug_course])
+
 
     class Meta:
         verbose_name = 'curso'
@@ -67,6 +75,13 @@ class Lesson(models.Model):
     def __str__(self):
         return self.name
     
+
+    def is_available(self):
+        if self.release_data:
+            today = timezone.now().date()
+            return self.release_data >= today
+        return False
+
 
     class Meta:
         verbose_name = 'Aula'

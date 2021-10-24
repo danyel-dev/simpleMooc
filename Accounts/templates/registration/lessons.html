@@ -1,0 +1,24 @@
+{% extends 'registration/course_adverts.html' %}
+
+{% block 'breadcrumbs' %}
+    {{ block.super }}
+    <li><a href="{{ course.course_adverts_url }}" class="text-decoration-none">Aulas</a></li>
+    <li>/</li>
+{% endblock %}
+
+{% block 'dashboard-main' %}
+    <h1 class="fs-3 mb-3">Aulas</h1>
+                        
+    <div class="d-flex flex-column gap-3">
+        {% for lesson in course.release_lessons %}
+            <div class="border border-1 px-3 py-2">
+                <a class="text-decoration-none fs-5 text-dark" href="#">{{ lesson.name }}</a>
+                <p class="text-muted">{{ lesson.description|truncatewords:'40' }}</p>
+
+                <a class="text-primary text-decoration-none" href="#">
+                    <i class="fas fa-eye"></i> Acessar Aula
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -89,3 +89,22 @@ def detail_advert(request, slug, id_advert):
             return redirect('detail-advert', slug, id_advert)
 
     return render(request, 'registration/detail_advert.html', {'course': course, 'advert': advert, 'comment_form': comment_form})
+
+
+@login_required
+@subscription_required
+def lessons(request, slug):
+    course = request.course
+    return render(request, 'registration/lessons.html', {'course': course})
+
+
+@login_required
+@subscription_required
+def detail_lesson(request, slug, id_lesson):
+    lesson = get_object_or_404(Lesson, pk=pk)
+    
+    if lesson.is_available():
+        messages.error(request, 'Aula indisponível')
+        return redirect('lessons', slug)
+
+    return render(request, 'registration/detail_lesson.html', {'lesson': lesson})
