@@ -104,7 +104,7 @@ class subscribe(models.Model):
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Usuário')
     course = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name='Curso')
-    status = models.IntegerField(choices=STATUS_CHOICES, default=1, blank=True, verbose_name='Situação')
+    status = models.IntegerField(choices=STATUS_CHOICES, default=0, blank=True, verbose_name='Situação')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Criado em')
     update_at = models.DateTimeField(auto_now=True, verbose_name='Atualizado em')
 

@@ -8,6 +8,8 @@ from django.contrib import messages
 from .forms import RegisterForm, EditAccountForm, CommentForm
 from Courses.models import subscribe, Course, Advert, Comment
 
+from .decorators import subscription_required
+
 
 def register(request):
     form = RegisterForm(request.POST or None)
@@ -58,31 +60,21 @@ def edit_password(request):
 
 
 @login_required
+@subscription_required
 def course_adverts(request, slug):
-    course = get_object_or_404(Course, slug_course=slug)
-    Subscriber = get_object_or_404(subscribe, user=request.user, course=course)
-    
+    course = request.course
     adverts = course.Adverts.all()
 
-    if not Subscriber.is_approved():
-        messages.error(request, 'Sua inscrição está pendente')
-        return redirect('dashboard')
-    
     return render(request, 'registration/course_adverts.html', {'course': course, 'adverts': adverts})
 
 
 @login_required
+@subscription_required
 def detail_advert(request, slug, id_advert):
-    course = get_object_or_404(Course, slug_course=slug)
-    Subscriber = get_object_or_404(subscribe, user=request.user, course=course)
+    course = request.course
+    advert = get_object_or_404(Advert, pk=id_advert)
     
     comment_form = CommentForm(request.POST or None)
-
-    if not Subscriber.is_approved():
-        messages.error(request, 'Sua inscrição está pendente')
-        return redirect('dashboard')
-
-    advert = get_object_or_404(Advert, pk=id_advert)
 
     if request.method == 'POST':
         if comment_form.is_valid():
@@ -93,6 +85,7 @@ def detail_advert(request, slug, id_advert):
             
             messages.success(request, 'Seu comentário foi enviado com sucesso')
             comment_form = CommentForm()
+    
             return redirect('detail-advert', slug, id_advert)
 
     return render(request, 'registration/detail_advert.html', {'course': course, 'advert': advert, 'comment_form': comment_form})
