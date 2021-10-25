@@ -6,7 +6,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 
 from .forms import RegisterForm, EditAccountForm, CommentForm
-from Courses.models import subscribe, Course, Advert, Comment
+from Courses.models import subscribe, Course, Advert, Comment, Lesson
 
 from .decorators import subscription_required
 
@@ -101,10 +101,11 @@ def lessons(request, slug):
 @login_required
 @subscription_required
 def detail_lesson(request, slug, id_lesson):
-    lesson = get_object_or_404(Lesson, pk=pk)
+    course = request.course
+    lesson = get_object_or_404(Lesson, pk=id_lesson)
     
-    if lesson.is_available():
+    if not lesson.is_available():
         messages.error(request, 'Aula indisponível')
         return redirect('lessons', slug)
 
-    return render(request, 'registration/detail_lesson.html', {'lesson': lesson})
+    return render(request, 'registration/detail_lesson.html', {'lesson': lesson, 'course': course})

@@ -1,0 +1,33 @@
+{% extends 'registration/lessons.html' %}
+
+{% block 'dashboard-main' %}
+    <div class="d-flex flex-column gap-3">
+        <div class="border border-1 p-3">
+            <h1 class="text-decoration-none fs-4 text-dark" href="#">{{ lesson.name }}</h1>
+            <p class="text-muted">{{ lesson.description }}</p>
+            
+            <h2 class="fs-6 mt-5">Material da aula</h2>
+
+            <table class="table">
+                <thead class="table-dark">
+                  <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Ação</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <th scope="row" class="fw-normal">Video de apresentação</th>
+                    <td><a href="#">Acessar</a></td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row" class="fw-normal">Slides de apresentação</th>
+                    <td><a href="">Baixar</a></td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+{% endblock %}

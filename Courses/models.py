@@ -79,7 +79,7 @@ class Lesson(models.Model):
     def is_available(self):
         if self.release_data:
             today = timezone.now().date()
-            return self.release_data >= today
+            return self.release_data <= today
         return False
 
 
