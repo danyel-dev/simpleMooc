@@ -30,7 +30,7 @@
 
                       {% if material.is_embedded %}
                         <th scope="row" class="fw-normal">
-                          <a href="#">Acessar</a>
+                          <a href="{% url 'material' course.slug_course material.id %}">Acessar</a>
                         </th>
                       {% else %}
                         <th scope="row" class="fw-normal">

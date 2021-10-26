@@ -1,0 +1,22 @@
+{% extends 'registration/lessons.html' %}
+
+
+{% block 'breadcrumbs' %}
+    {{ block.super }}
+    <li><a href="{% url 'detail-lesson' course.slug_course lesson.id %}" class="text-decoration-none">Materiais</a></li>
+    <li>/</li>
+    <li><a href="{% url 'material' course.slug_course material.id %}" class="text-decoration-none">{{ material }}</a></li>
+    <li>/</li>
+{% endblock %}
+
+{% block 'dashboard-main' %}
+<div class="d-flex flex-column gap-3">
+    <div class="border border-1 p-3">
+            <h1 class="fs-4 mb-4">{{ material }}</h1>
+            
+            {{ material.embedded|safe }}
+
+            <a href="{% url 'detail-lesson' course.slug_course lesson.id %}" class="d-block mt-3 text-decoration-none">Voltar</a>
+        </div>
+    </div>
+{% endblock %}

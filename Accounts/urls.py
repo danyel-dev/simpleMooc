@@ -12,4 +12,5 @@ urlpatterns = [
     path('<slug:slug>/anuncios/<int:id_advert>/', views.detail_advert,  name='detail-advert'),
     path('<slug:slug>/aulas/', views.lessons,  name='lessons'),
     path('<slug:slug>/aula/<int:id_lesson>/', views.detail_lesson,  name='detail-lesson'),
+    path('<slug:slug>/material/<int:id_material>/', views.material,  name='material'),
 ]

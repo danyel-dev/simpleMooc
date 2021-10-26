@@ -6,7 +6,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 
 from .forms import RegisterForm, EditAccountForm, CommentForm
-from Courses.models import subscribe, Course, Advert, Comment, Lesson
+from Courses.models import subscribe, Course, Advert, Comment, Lesson, Material
 
 from .decorators import subscription_required
 
@@ -109,3 +109,20 @@ def detail_lesson(request, slug, id_lesson):
         return redirect('lessons', slug)
 
     return render(request, 'registration/detail_lesson.html', {'lesson': lesson, 'course': course})
+
+
+@login_required
+@subscription_required
+def material(request, slug, id_material):
+    course = request.course
+    material = get_object_or_404(Material, pk=id_material)
+    lesson = material.lesson
+
+    if not lesson.is_available():
+        messages.error(request, 'Esse material não está disponível')
+        return redirect('dashboard')
+
+    if not material.is_embedded():
+        return redirect(material.file.url)
+
+    return render(request, 'registration/material.html', {'course': course, 'material': material, 'lesson': lesson})
