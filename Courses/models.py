@@ -94,7 +94,7 @@ class Material(models.Model):
     embedded = models.TextField('Video embutido', blank=True)
     file = models.FileField('Arquivo', upload_to='lessons/materials', blank=True, null=True)
 
-    lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
+    lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, related_name='Materials')
 
 
     def is_embedded(self):

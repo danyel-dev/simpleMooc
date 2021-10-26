@@ -1,9 +1,16 @@
 {% extends 'registration/lessons.html' %}
 
+
+{% block 'breadcrumbs' %}
+    {{ block.super }}
+    <li><a href="{% url 'detail-lesson' course.slug_course lesson.id %}" class="text-decoration-none">{{ lesson.name }}</a></li>
+    <li>/</li>
+{% endblock %}
+
 {% block 'dashboard-main' %}
     <div class="d-flex flex-column gap-3">
         <div class="border border-1 p-3">
-            <h1 class="text-decoration-none fs-4 text-dark" href="#">{{ lesson.name }}</h1>
+            <h1 class="text-decoration-none fs-4 text-dark" href="#">{{ lesson }}</h1>
             <p class="text-muted">{{ lesson.description }}</p>
             
             <h2 class="fs-6 mt-5">Material da aula</h2>
@@ -17,15 +24,21 @@
                 </thead>
 
                 <tbody>
-                  <tr>
-                    <th scope="row" class="fw-normal">Video de apresentação</th>
-                    <td><a href="#">Acessar</a></td>
-                  </tr>
+                  {% for material in lesson.Materials.all %}
+                    <tr>
+                      <th scope="row" class="fw-normal">{{ material }}</th>
 
-                  <tr>
-                    <th scope="row" class="fw-normal">Slides de apresentação</th>
-                    <td><a href="">Baixar</a></td>
-                  </tr>
+                      {% if material.is_embedded %}
+                        <th scope="row" class="fw-normal">
+                          <a href="#">Acessar</a>
+                        </th>
+                      {% else %}
+                        <th scope="row" class="fw-normal">
+                          <a target="_blank" href="{{ material.file.url }}">Baixar</a>
+                        </th>
+                      {% endif %}
+                    </tr>
+                  {% endfor %}
                 </tbody>
               </table>
         </div>
