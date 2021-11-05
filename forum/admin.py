@@ -10,7 +10,7 @@ class TopicAdmin(admin.ModelAdmin):
 
 class ReplyAdmin(admin.ModelAdmin):
     list_display = ('topic', 'author', 'created_at', 'update_at')
-    search_fields = ('thread__title', 'author__email', 'reply')
+    search_fields = ('topic__title', 'author__email', 'reply')
 
 
 admin.site.register(Topic, TopicAdmin)

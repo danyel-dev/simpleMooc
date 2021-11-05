@@ -12,15 +12,15 @@
         <h6 class="px-3 py-2 border-bottom text-uppercase text-muted">Listagem dos Tópicos</h6>
         
         <ul class="px-3 py-1" style="list-style-type: none;">
-            <li>
+            <li class="pb-1">
                 <i class="fas fa-undo-alt" style="font-size: 15px; color: rgba(0, 0, 0, 0.5)"></i>
                 Mais recentes
             </li>
-            <li>
+            <li class="pb-1">
                 <i class="fas fa-eye" style="font-size: 15px; color: rgba(0, 0, 0, 0.5)"></i>
                 Mais visualizados
             </li>
-            <li>
+            <li class="pb-1">
                 <i class="fas fa-comments" style="font-size: 15px; color: rgba(0, 0, 0, 0.5)"></i>
                 Mais comentados
             </li>
@@ -29,35 +29,45 @@
         <h6 class="px-3 pb-2 border-bottom text-uppercase text-muted">Tags</h6>
         
         <ul class="px-3 pt-1" style="list-style-type: none;">
-            <li><i class="fas fa-tags" style="font-size: 13px; color: rgba(0, 0, 0, 0.5)"></i> Python</li>
-            <li><i class="fas fa-tags" style="font-size: 13px; color: rgba(0, 0, 0, 0.5)"></i> Lorem Ipsum</li>
-            <li><i class="fas fa-tags" style="font-size: 13px; color: rgba(0, 0, 0, 0.5)"></i> Django</li>
-            <li><i class="fas fa-tags" style="font-size: 13px; color: rgba(0, 0, 0, 0.5)"></i> Deploy</li>
+            <li class='pb-1'>
+                <i class="fas fa-tags" style="font-size: 13px; color: rgba(0, 0, 0, 0.5)"></i> Python
+            </li>
+            <li class='pb-1'>
+                <i class="fas fa-tags" style="font-size: 13px; color: rgba(0, 0, 0, 0.5)"></i> Lorem Ipsum
+            </li>
+            <li class='pb-1'>
+                <i class="fas fa-tags" style="font-size: 13px; color: rgba(0, 0, 0, 0.5)"></i> Django
+            </li>
+            <li class='pb-1'>
+                <i class="fas fa-tags" style="font-size: 13px; color: rgba(0, 0, 0, 0.5)"></i> Deploy
+            </li>
         </ul>
     </div>
 {% endblock %}
 
 {% block 'dashboard-main' %} 
-    <div>
-        {% for topic in objects_list %}
+    <div class="d-flex flex-column gap-4">
+        {% for topic in object_list %}
             <div class="border border-1 px-3 pt-2">
                 <h3><a href="#" class="text-decoration-none">{{ topic.title }}</a></h3>
                 <small class="text-muted d-block pb-2">
                     Criado Por {{ topic.author }} |
                     {{ topic.answers }} Respostas |
-                    {{ topic.views }} Visualizaç{{ topic.views|pluralize:"ão","ões" }}
+                    {{ topic.views }} Visualizaç{{ topic.views|pluralize:"ão,ões" }}
                 </small>
                 
                 <i class="fas fa-tags" style="font-size: 14px; color: rgba(0, 0, 0, 0.5)"></i> Tags:
             
                 <div class='d-flex justify-content-between'>
                     <ul class="p-0 d-flex gap-2" style="list-style-type: none">
-                        {% for tag in topic.tags %}
-                            <li><a href="#" class="text-decoration-none">{{ tag }}</a>,</li>
+                        {% for tag in topic.tags.all %}
+                            <li>
+                                <a href="#" class="text-decoration-none">{{ tag }}</a>{% if not forloop.last%},{% endif %}
+                            </li>
                         {% endfor %}
                     </ul>
 
-                    <p>Atualizado a {{ topic.updated_at|timesince }} atrás.</p>
+                    <p>Atualizado a {{ topic.update_at|timesince }} atrás.</p>
                 </div>
             </div>
         {% endfor %}
