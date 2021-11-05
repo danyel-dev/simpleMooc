@@ -1,12 +1,65 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Hello, World!</h1>    
-</body>
-</html>
+{% extends 'registration/dashboard.html' %}
+
+{% block 'title' %} Forum - Tópicos {% endblock %}
+
+{% block 'breadcrumbs' %}
+    <li><a href="#" class="text-decoration-none">Tópicos do Fórum</a></li>
+    <li class="text-muted">/</li>
+{% endblock %}
+
+{% block 'dashboard-aside' %} 
+    <div>
+        <h6 class="px-3 py-2 border-bottom text-uppercase text-muted">Listagem dos Tópicos</h6>
+        
+        <ul class="px-3 py-1" style="list-style-type: none;">
+            <li>
+                <i class="fas fa-undo-alt" style="font-size: 15px; color: rgba(0, 0, 0, 0.5)"></i>
+                Mais recentes
+            </li>
+            <li>
+                <i class="fas fa-eye" style="font-size: 15px; color: rgba(0, 0, 0, 0.5)"></i>
+                Mais visualizados
+            </li>
+            <li>
+                <i class="fas fa-comments" style="font-size: 15px; color: rgba(0, 0, 0, 0.5)"></i>
+                Mais comentados
+            </li>
+        </ul>
+
+        <h6 class="px-3 pb-2 border-bottom text-uppercase text-muted">Tags</h6>
+        
+        <ul class="px-3 pt-1" style="list-style-type: none;">
+            <li><i class="fas fa-tags" style="font-size: 13px; color: rgba(0, 0, 0, 0.5)"></i> Python</li>
+            <li><i class="fas fa-tags" style="font-size: 13px; color: rgba(0, 0, 0, 0.5)"></i> Lorem Ipsum</li>
+            <li><i class="fas fa-tags" style="font-size: 13px; color: rgba(0, 0, 0, 0.5)"></i> Django</li>
+            <li><i class="fas fa-tags" style="font-size: 13px; color: rgba(0, 0, 0, 0.5)"></i> Deploy</li>
+        </ul>
+    </div>
+{% endblock %}
+
+{% block 'dashboard-main' %} 
+    <div>
+        {% for topic in objects_list %}
+            <div class="border border-1 px-3 pt-2">
+                <h3><a href="#" class="text-decoration-none">{{ topic.title }}</a></h3>
+                <small class="text-muted d-block pb-2">
+                    Criado Por {{ topic.author }} |
+                    {{ topic.answers }} Respostas |
+                    {{ topic.views }} Visualizaç{{ topic.views|pluralize:"ão","ões" }}
+                </small>
+                
+                <i class="fas fa-tags" style="font-size: 14px; color: rgba(0, 0, 0, 0.5)"></i> Tags:
+            
+                <div class='d-flex justify-content-between'>
+                    <ul class="p-0 d-flex gap-2" style="list-style-type: none">
+                        {% for tag in topic.tags %}
+                            <li><a href="#" class="text-decoration-none">{{ tag }}</a>,</li>
+                        {% endfor %}
+                    </ul>
+
+                    <p>Atualizado a {{ topic.updated_at|timesince }} atrás.</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

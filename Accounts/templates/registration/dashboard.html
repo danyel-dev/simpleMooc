@@ -19,9 +19,10 @@
 
         <div class="row mb-5">
             <div class="col-3 p-0 d-block border border-1" style="margin-right: 50px; height: max-content;">
-                <p class="text-uppercase fw-bold px-3 py-2 m-0 border-bottom">bem-vindo, {{ user.username }}</p>
                 
                 {% block 'dashboard-aside' %}
+                    <p class="text-uppercase fw-bold px-3 py-2 m-0 border-bottom">bem-vindo, {{ user.username }}</p>
+                    
                     <ul class="nav flex-column border-bottom px-3 py-2">
                         <p class="mb-0 text-uppercase">Cursos</p>
                         

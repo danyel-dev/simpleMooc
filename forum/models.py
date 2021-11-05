@@ -14,8 +14,11 @@ class Topic(models.Model):
     views = models.IntegerField(blank=True, default=0, verbose_name='Visualizações')
     answers = models.IntegerField(blank=True, default=0, verbose_name='Respostas')
 
+    tags = TaggableManager()
+
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
+
 
     def __str__(self):
         return self.title
@@ -28,9 +31,11 @@ class Topic(models.Model):
 
 
 class Reply(models.Model):
+    
+    topic = models.ForeignKey(Topic, on_delete=models.CASCADE, verbose_name='Tópico', related_name='replies')
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Autor', related_name='replies')
 
     reply = models.TextField(verbose_name='Resposta')
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Autor', related_name='replys')
 
     corrent = models.BooleanField(blank=True, default=False, verbose_name='Correta?')
 
