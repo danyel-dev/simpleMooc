@@ -4,12 +4,12 @@ from .models import Topic, Reply
 
 
 class TopicAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'created_at', 'update_at')
+    list_display = ('title', 'author', 'created_at', 'updated_at')
     search_fields = ('title', 'author__email', 'body')
 
 
 class ReplyAdmin(admin.ModelAdmin):
-    list_display = ('topic', 'author', 'created_at', 'update_at')
+    list_display = ('topic', 'author', 'created_at', 'updated_at')
     search_fields = ('topic__title', 'author__email', 'reply')
 
 

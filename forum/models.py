@@ -17,7 +17,7 @@ class Topic(models.Model):
     tags = TaggableManager()
 
     created_at = models.DateTimeField(auto_now_add=True)
-    update_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 
     def __str__(self):
@@ -27,7 +27,7 @@ class Topic(models.Model):
     class Meta:
         verbose_name = 'Tópico'
         verbose_name_plural = 'Tópicos'
-        ordering = ['-update_at']
+        ordering = ['-updated_at']
 
 
 class Reply(models.Model):
@@ -40,7 +40,7 @@ class Reply(models.Model):
     corrent = models.BooleanField(blank=True, default=False, verbose_name='Correta?')
 
     created_at = models.DateTimeField(auto_now_add=True)
-    update_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 
     def __str__(self):
