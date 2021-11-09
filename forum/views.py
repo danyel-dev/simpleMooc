@@ -17,6 +17,11 @@ class forum(ListView):
             order = '-' + self.request.GET.get('order')
             queryset = queryset.order_by(order)
 
+        slug_tag = self.kwargs.get('slug_tag', '')
+
+        if slug_tag:
+            queryset = queryset.filter(tags__slug__icontains=slug_tag)
+
         return queryset
 
 
