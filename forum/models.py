@@ -8,10 +8,15 @@ from taggit.managers import TaggableManager
 class Topic(models.Model):
 
     title = models.CharField(max_length=100, verbose_name='Título')
+    
     body = models.TextField(verbose_name='Mensagem')
+    
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Autor', related_name='topics')
     
+    slug = models.SlugField(max_length=100, unique=True, verbose_name='identificador')
+
     views = models.IntegerField(blank=True, default=0, verbose_name='Visualizações')
+    
     answers = models.IntegerField(blank=True, default=0, verbose_name='Respostas')
 
     tags = TaggableManager()
