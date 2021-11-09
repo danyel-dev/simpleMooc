@@ -1,2 +1,63 @@
 {% extends 'forum/list_topics.html' %}
 
+{% block 'dashboard-main' %} 
+    <div class="border border-1 px-3 py-2 mb-4">
+        <h2>{{ object.title }}</h2>
+        <p class='text-muted'>{{ object.body }}</p>
+
+        <small class="d-block mb-3"><strong>Criado por {{ object.author }}</strong></small>
+
+        <div class="d-flex justify-content-between">
+            <ul class="d-flex align-items-center gap-2 p-0" style="list-style-type: none">
+                <i class="fas fa-tags" style="font-size: 13px; color: rgba(0, 0, 0, 0.5)"></i>
+               
+                {% for tag in object.tags.all %}
+                    <a href="#" class="text-decoration-none">
+                        <li>{{ tag }}{% if not forloop.last%},{% endif %}</li>
+                    </a>
+                {% endfor %}
+            </ul>
+
+            <p class="fw-bold text-muted">Criado a {{ object.updated_at|timesince }} atrás</p>
+        </div>
+    </div>
+
+    <div class='border border-1 px-3 py-2'>
+        <div class="d-flex justify-content-between mb-2">
+            <span class="fw-bold text-muted">Respostas</span>
+            <a href="#" class="text-decoration-none fw-bold">Responder</a>
+        </div>
+
+        <div class='mb-5'>
+            <div style='border-top: 2px solid rgba(0, 0, 0, 0.2)'>
+                <small>
+                    <span class='fw-bold text-muted'>Fulano de Tal</span> disse a 4 dias atrás:
+                </small>
+
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus aperiam inventore, quae pariatur at, eius voluptate fugit, accusantium dolorem quidem dolor. Animi voluptates dolorem minus odit, libero doloremque voluptatem accusantium!
+                </p>
+            </div>
+
+            <div style='border-top: 2px solid rgba(0, 0, 0, 0.2)'>
+                <small>
+                    <span class='fw-bold text-muted'>Fulano de Tal</span> disse a 4 dias atrás:
+                </small>
+
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus aperiam inventore, quae pariatur at, eius voluptate fugit, accusantium dolorem quidem dolor. Animi voluptates dolorem minus odit, libero doloremque voluptatem accusantium!
+                </p>
+            </div>
+        </div>
+
+        <div>
+            <form>
+                <span class='fw-bold text-muted d-block mb-1'>Responder</span>
+
+                <textarea class='form-control mb-2' rows='3' cols='1'></textarea>
+
+                <button class='btn btn-primary px-3 py-1'>Enviar</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
