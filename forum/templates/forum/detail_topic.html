@@ -31,7 +31,7 @@
         <div class='mb-4'>
             {% for reply in topic.replies.all %}
                 <div style='border-top: 2px solid rgba(0, 0, 0, 0.2)'>
-                    <small class="d-block my-2">
+                    <small class="d-block mb-2 mt-3">
                         <span class='fw-bold text-muted'>{{ reply.author }}</span> disse a {{ reply.created_at|timesince }} atrás:
                     </small>
 
