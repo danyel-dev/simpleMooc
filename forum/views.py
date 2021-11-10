@@ -1,6 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView
+from django.contrib import messages
+
 from .models import Topic
+from .forms import ReplyForm
 
 
 class forum(ListView):
@@ -44,4 +47,26 @@ class forum(ListView):
 def detail_topic(request, slug_topic):
     topic = get_object_or_404(Topic, slug=slug_topic)
     tags = Topic.tags.all()
-    return render(request, 'forum/detail_topic.html', {'topic': topic, 'tags': tags})
+
+    if topic.author != request.user:
+        topic.views = topic.views + 1
+        topic.save()
+
+    form = ReplyForm(request.POST or None)
+
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            if form.is_valid():
+                reply = form.save(commit=False)
+                reply.topic = topic
+                reply.author = request.user
+                reply.save()
+
+                form = ReplyForm()
+                messages.success(request, 'Comentário enviado com sucesso!')
+                
+                return redirect('detail-topic', slug_topic)
+        else:
+            return redirect('login')
+        
+    return render(request, 'forum/detail_topic.html', {'topic': topic, 'tags': tags, 'form': form})
