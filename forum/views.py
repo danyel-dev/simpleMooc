@@ -1,6 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
-
 from .models import Topic
 
 
@@ -31,13 +30,18 @@ class forum(ListView):
         return context
 
 
-class detail_topic(DetailView):
+# class detail_topic(DetailView):
 
-    model = Topic
-    template_name = 'forum/detail_topic.html'
+#     model = Topic
+#     template_name = 'forum/detail_topic.html'
 
-    def get_context_data(self, **kwargs):
-        context = super(detail_topic, self).get_context_data(**kwargs)
-        context['tags'] = Topic.tags.all()
-        return context
-    
+#     def get_context_data(self, **kwargs):
+#         context = super(detail_topic, self).get_context_data(**kwargs)
+#         context['tags'] = Topic.tags.all()
+#         return context
+
+
+def detail_topic(request, slug_topic):
+    topic = get_object_or_404(Topic, slug=slug_topic)
+    tags = Topic.tags.all()
+    return render(request, 'forum/detail_topic.html', {'topic': topic, 'tags': tags})

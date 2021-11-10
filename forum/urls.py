@@ -5,5 +5,5 @@ from . import views
 urlpatterns = [
     path('topicos/', views.forum.as_view(), name='forum'),
     path('topicos/tag/<slug:slug_tag>/', views.forum.as_view(), name='forum-tag'),
-    path('topico/<slug:slug>/', views.detail_topic.as_view(), name='detail-topic'),
+    path('topico/<slug:slug_topic>/', views.detail_topic, name='detail-topic'),
 ]
