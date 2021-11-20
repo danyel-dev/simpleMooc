@@ -56,7 +56,7 @@
                         
                         {% for subscribe in registrations %}
                             <div class="border border-1 p-3">
-                                <h2 class="fs-4"><a href="#" class="text-decoration-none">{{ subscribe.course }}</a></h2>
+                                <h2 class="fs-4"><a href="{{ subscribe.course.course_adverts_url }}" class="text-decoration-none">{{ subscribe.course }}</a></h2>
                                 <small class="text-muted d-block mb-2">{{ subscribe.course.created_at }}</small>   
 
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt maiores quia voluptatem aspernatur, voluptatum sequi optio non repudiandae magni dicta quis sed amet ullam provident tempora natus perspiciatis expedita fugit.</p>

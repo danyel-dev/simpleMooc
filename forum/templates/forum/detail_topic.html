@@ -1,5 +1,11 @@
 {% extends 'forum/list_topics.html' %}
 
+{% block 'breadcrumbs' %}
+    {{ block.super }}
+    <li><a href="{% url 'detail-topic' topic.slug %}" class="text-decoration-none">{{ topic.slug }}</a></li>
+    <li class="text-muted">/</li>
+{% endblock %}
+
 {% block 'dashboard-main' %} 
     <div class="border border-1 px-3 py-2 mb-4">
         <h2>{{ topic.title }}</h2>
@@ -12,7 +18,7 @@
                 <i class="fas fa-tags" style="font-size: 13px; color: rgba(0, 0, 0, 0.5)"></i>
                
                 {% for tag in topic.tags.all %}
-                    <a href="#" class="text-decoration-none">
+                    <a href="{% url 'forum-tag' tag.slug %}" class="text-decoration-none">
                         <li>{{ tag }}{% if not forloop.last%},{% endif %}</li>
                     </a>
                 {% endfor %}
